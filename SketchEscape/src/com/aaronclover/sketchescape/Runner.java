@@ -100,6 +100,8 @@ public class Runner{
 				new Texture(Gdx.files.internal("data/runner/dead/6.png")) };
 		deadSprite = deadInit;
 		
+		Texture hammer = new Texture(Gdx.files.internal("data/runner/hammer.png");
+		
 		jump = Gdx.audio.newSound(Gdx.files.internal("data/runner/jump.wav"));
 		land = Gdx.audio.newSound(Gdx.files.internal("data/runner/land.wav"));
 
