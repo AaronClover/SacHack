@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SketchEscape"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-android.jar" sourcepath="libs/gdx-backend-android-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/GitHub/SketchEscape/SketchEscape/libs/bodyeditor-loader.jar" sourcepath="/my-gdx-game/libs/bodyeditor-loader-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/GitHub/SketchEscape/SketchEscape/libs/gdx.jar" sourcepath="/my-gdx-game/libs/gdx-sources.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="../SketchEscape/libs"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/GitHub/SketchEscape/SketchEscape/libs/tween-engine-api.jar" sourcepath="/my-gdx-game/libs/tween-engine-api-sources.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="../SketchEscape/libs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/GitHub/SketchEscape/SketchEscape-android/libs/GoogleAdMobAdsSdk-6.4.1.jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>

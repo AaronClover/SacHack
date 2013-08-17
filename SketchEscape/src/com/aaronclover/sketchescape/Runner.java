@@ -24,12 +24,15 @@ public class Runner{
 	protected int animationIndex;
 	private float lastFrameTime;
 	protected Rectangle hitbox;
+	protected Rectangle hammerHitbox;
 	private float RESW;
 	private float RESH;
 	final int JUMP_WIDTH = 24;
 	final int DUCK_HEIGHT = 43;
 	final int SPRITE_WIDTH = 58;
 	final int SPRITE_HEIGHT = 60;
+	final int HAMMER_SPRITE_WIDTH = 50;
+	final int HAMMER_SPRITE_HEIGHT = 58;
 	final int SCALE = 1; // Only affects hit box at the moment
 	final int WIDTH = SPRITE_WIDTH * SCALE;
 	final int HEIGHT = SPRITE_HEIGHT * SCALE;
@@ -108,6 +111,8 @@ public class Runner{
 
 		hitbox = new Rectangle(camera.position.x + posX, floorHeight,
 				SPRITE_WIDTH, SPRITE_HEIGHT);
+				
+		hammerHitbox = new Rectangle (hitbox.x + SPRITE_WIDTH, hitbox.y, HAMMER_SPRITE_WIDTH, HAMMER_SPRITE_HEIGHT);
 		animationIndex = 0;
 		lastFrameTime = TimeUtils.nanoTime();
 		state = State.running;
@@ -179,8 +184,13 @@ public class Runner{
 	public void drawHitbox() {
 		shapeRenderer.setColor(Color.BLACK);
 		shapeRenderer.begin(ShapeType.Line);
-		shapeRenderer.rect(hitbox.x*SCREENSCALEX, hitbox.y*SCREENSCALEY, hitbox.width, hitbox.height);
+		//shapeRenderer.rect(hitbox.x*SCREENSCALEX, hitbox.y*SCREENSCALEY, hitbox.width, hitbox.height);
+		
+		shapeRenderer.rect(hammerHitbox.x*SCREENSCALEX, hitbox.y*SCREENSCALEY, hammerHitbox.width, hammerHitbox.height);
+		
 		shapeRenderer.end();
+		
+		
 	}
 
 
@@ -218,7 +228,6 @@ public class Runner{
 			}
 		}
 
-		
 	}
 	
 	public void land(float f) {

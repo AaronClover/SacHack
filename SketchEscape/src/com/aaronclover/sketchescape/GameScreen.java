@@ -277,7 +277,7 @@ public class GameScreen extends MyScreen {
 //		if (fall == true) {
 //			runner.fall();
 //		}
-//		//runner.drawHitbox();
+		runner.drawHitbox();
 //		
 		runner.update();
 
