@@ -18,6 +18,7 @@ public class Runner{
 	private Texture runningSprite[];
 	private Texture jumpingSprite[];
 	private Texture duckingSprite[];
+	private Texture hammer;
 	private Sound jump, land;
 	private Texture deadSprite[];
 	protected int animationIndex;
@@ -100,7 +101,7 @@ public class Runner{
 				new Texture(Gdx.files.internal("data/runner/dead/6.png")) };
 		deadSprite = deadInit;
 		
-		Texture hammer = new Texture(Gdx.files.internal("data/runner/hammer.png");
+		hammer = new Texture(Gdx.files.internal("data/runner/hammer.png"));
 		
 		jump = Gdx.audio.newSound(Gdx.files.internal("data/runner/jump.wav"));
 		land = Gdx.audio.newSound(Gdx.files.internal("data/runner/land.wav"));
@@ -171,6 +172,7 @@ public class Runner{
 					lastFrameTime = TimeUtils.nanoTime();
 				}
 		batch.draw(currentSprite, hitbox.x, hitbox.y);
+		batch.draw(hammer, hitbox.x + SPRITE_WIDTH, hitbox.y);
 
 	}
 	
