@@ -36,9 +36,10 @@ public class Obstacle {
 
 		batch.draw(image, hitbox.x - SCALE / 2, hitbox.y - SCALE / 2, hitbox.width, hitbox.height);
 	}
-
+	
 	public void dispose() {
 		image.dispose();
+		
 	}
 
 

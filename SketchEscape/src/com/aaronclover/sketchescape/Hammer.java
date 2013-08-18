@@ -16,8 +16,8 @@ public class Hammer {
 	final int SPRITE_HEIGHT = 58;
 	
 	Hammer(Runner runner, ArrayList<Obstacle> obstacles) {
-		runner = this.runner;
-		obstacles = this.obstacles;
+		this.runner = runner;
+		this.obstacles = obstacles;
 		create();
 	}
 	

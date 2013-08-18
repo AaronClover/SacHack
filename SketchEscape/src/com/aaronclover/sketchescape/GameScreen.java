@@ -40,6 +40,7 @@ public class GameScreen extends MyScreen {
 	protected float floorPosX[];
 	private Vector2 floorBox = new Vector2(800, 20);
 	protected float backgroundPosX[];
+	public Hammer hammer;
 	
 	
 
@@ -105,6 +106,8 @@ public class GameScreen extends MyScreen {
 
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		
+		hammer = new Hammer(runner, obstacles);
 	}
 
 	@Override
@@ -218,10 +221,14 @@ public class GameScreen extends MyScreen {
 			obstacles.get(i).draw(batch);
 		}
 		//if(score >= 100)
-
+		//Draws hammer
+		hammer.draw(batch);
+		
 		batch.end();
 		camera.update();
 		// End of drawing
+		
+		hammer.update();
 
 		// generate random selection for obstacle to be on floor or mid height.
 		spawnPositionRandom = MathUtils.random(1, 2);
