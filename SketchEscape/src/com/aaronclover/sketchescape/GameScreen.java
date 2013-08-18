@@ -217,6 +217,7 @@ public class GameScreen extends MyScreen {
 		for (int i = 0; i < obstacles.size(); i++) {
 			obstacles.get(i).draw(batch);
 		}
+		//if(score >= 100)
 
 		batch.end();
 		camera.update();
@@ -254,14 +255,23 @@ public class GameScreen extends MyScreen {
 						+ Obstacle.SPRITE_HEIGHT) && (runner.hitbox.y + runner.hitbox.height > obstacles.get(i).hitbox.y)) {
 					endGame();
 				}
-//				// Checks if runner is landing above box
-//				else if (runner.hitbox.y <= obstacles.get(i).hitbox.y + Obstacle.SPRITE_HEIGHT 
-//						&& runner.hitbox.y + runner.hitbox.height > obstacles.get(i).hitbox.y + Obstacle.SPRITE_HEIGHT) {
-//					runner.land(obstacles.get(i).hitbox.y
-//							+ Obstacle.SPRITE_HEIGHT);
-//					fall = false;
-//				}
+
 			}
+			
+			if (runner.hammerHitbox.overlaps(obstacles.get(i).hitbox)) {
+				obstacles.remove(i);
+			}
+			
+//			//Checks if hammer collides with an obstacle on the x axis
+//			if (runner.hammerHitbox.x + runner.hammerHitbox.width > obstacles.get(i).hitbox.x
+//					&& runner.hammerHitbox.x + runner.hammerHitbox.width < obstacles.get(i).hitbox.x + obstacles.get(i).hitbox.width) {
+//				//Checks if runner is in obstacle on y axis
+//				if ((runner.hammerHitbox.y < obstacles.get(i).hitbox.y - 5
+//						+ Obstacle.SPRITE_HEIGHT) && (runner.hammerHitbox.y + runner.hammerHitbox.height > obstacles.get(i).hitbox.y)) {
+//					endGame();
+//				}
+//
+//			}
 
 		}
 //
@@ -277,7 +287,7 @@ public class GameScreen extends MyScreen {
 //		if (fall == true) {
 //			runner.fall();
 //		}
-		runner.drawHitbox();
+		//runner.drawHitbox();
 //		
 		runner.update();
 
@@ -378,5 +388,9 @@ public class GameScreen extends MyScreen {
 	public void pause() {
 		super.pause();
 		gameState = GameState.paused;
+	}
+	
+	public void hammerPower() {
+		System.out.println("Hamer powerup");
 	}
 }

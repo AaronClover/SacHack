@@ -153,11 +153,11 @@ public class Runner{
 					currentSprite = deadSprite[animationIndex];
 					break;
 				default:
-					System.out.println("Animation switch broken");
+					//System.out.println("Animation switch broken");
 					break;
 				}
 				
-				System.out.println(state);
+				//System.out.println(state);
 
 				// Handles changing sprites for animation
 				if (TimeUtils.nanoTime() - lastFrameTime >= 80000000) {
@@ -168,7 +168,7 @@ public class Runner{
 					} else if (state == State.dead) {
 						if (animationIndex < deadSprite.length - 1) {
 							animationIndex++;
-							System.out.println(deadSprite.length - 1);
+							//System.out.println(deadSprite.length - 1);
 						}
 					} else {
 						animationIndex++;
@@ -177,7 +177,7 @@ public class Runner{
 					lastFrameTime = TimeUtils.nanoTime();
 				}
 		batch.draw(currentSprite, hitbox.x, hitbox.y);
-		batch.draw(hammer, hitbox.x + SPRITE_WIDTH, hitbox.y);
+		batch.draw(hammer, hammerHitbox.x, hammerHitbox.y);
 
 	}
 	
@@ -186,7 +186,7 @@ public class Runner{
 		shapeRenderer.begin(ShapeType.Line);
 		//shapeRenderer.rect(hitbox.x*SCREENSCALEX, hitbox.y*SCREENSCALEY, hitbox.width, hitbox.height);
 		
-		shapeRenderer.rect(hammerHitbox.x*SCREENSCALEX, hitbox.y*SCREENSCALEY, hammerHitbox.width, hammerHitbox.height);
+		shapeRenderer.rect(hammerHitbox.x*SCREENSCALEX - camera.position.x+400 , hitbox.y*SCREENSCALEY, hammerHitbox.width, hammerHitbox.height);
 		
 		shapeRenderer.end();
 		
@@ -219,6 +219,9 @@ public class Runner{
 
 	
 		hitbox.x = camera.position.x + posX;
+		
+		hammerHitbox.x = hitbox.x + SPRITE_WIDTH;
+		hammerHitbox.y = hitbox.y;
 
 		if (state == State.ducking) {
 			if (TimeUtils.nanoTime() - beginningOfRoll > 500000000) {
