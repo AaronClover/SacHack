@@ -54,6 +54,8 @@ public class GameScreen extends MyScreen {
 	private long waitCounter;
 	private float increment;
 	private float blockDistance = 400;
+	private int rockSpawnTimer;
+	private long lastRockSpawn;
 
 	public GameScreen(SketchEscape g) {
 		spriteBatch = new SpriteBatch();
@@ -65,6 +67,8 @@ public class GameScreen extends MyScreen {
 		gameState = GameState.running;
 		runSpeed = 6;
 		increment = TimeUtils.nanoTime();
+		lastRockSpawn = 0;
+		rockSpawnTimer = MathUtils.random(1, 5);
 
 		manager.load("data/floor.png", Texture.class);
 		manager.load("data/floor.png", Texture.class);
@@ -72,6 +76,7 @@ public class GameScreen extends MyScreen {
 		manager.load("data/pause.png", Texture.class);
 		manager.update();
 		manager.finishLoading();
+		
 
 		floor = manager.get("data/floor.png", Texture.class);
 		background = manager.get("data/whitepaper.png", Texture.class);
@@ -83,6 +88,7 @@ public class GameScreen extends MyScreen {
 		batch = new SpriteBatch();
 		runner = new Runner(camera, FLOOR_HEIGHT);
 
+		
 		obstacles = new ArrayList<Obstacle>();
 		rocks = new ArrayList<Rock>();
 		
@@ -144,8 +150,12 @@ public class GameScreen extends MyScreen {
 
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		for (int i = 0; i < rocks.size(); i++) {
+			rocks.get(i).update();
+		}
 
 		camera.update();
+		
 
 		batch.setProjectionMatrix(camera.combined);
 
@@ -183,6 +193,7 @@ public class GameScreen extends MyScreen {
 			}
 		}
 
+		
 		camera.position.add(runSpeed, 0, 0);
 
 
@@ -247,7 +258,13 @@ if (score - hammerScore >= 50)
 		camera.update();
 		// End of drawing
 		
-
+		//Spawns rocks
+		if(TimeUtils.nanoTime() - lastRockSpawn > rockSpawnTimer*1000000000) {
+			rockSpawnTimer = MathUtils.random(1, 5);
+			lastRockSpawn = TimeUtils.nanoTime();
+			//spawnRock();
+		}
+		
 		// generate random selection for obstacle to be on floor or mid height.
 		spawnPositionRandom = MathUtils.random(1, 2);
 		if (spawnPositionRandom == 1) {
@@ -261,9 +278,8 @@ if (score - hammerScore >= 50)
 					spawnPositionY));
 			lastSpawnPos = obstacles.get(obstacles.size() - 1).hitbox.x;
 		}
-		if (rocks.size() < 2) {
-			rocks.add(new Rock(camera, camera.position.x, 200));
-		}
+		
+		
 
 		boolean fall = true;
 		
@@ -311,6 +327,9 @@ if (score - hammerScore >= 50)
 		//runner.drawHitbox();
 //		
 		runner.update();
+		for (int i = 0; i < rocks.size(); i++) {
+			rocks.get(i).update();
+		}
 		if (runner.hasHammer) {
 			hammer.update();
 		}
@@ -422,4 +441,11 @@ if (score - hammerScore >= 50)
 	public void hammerPower() {
 		System.out.println("Hamer powerup");
 	}
+	
+	public void spawnRock() {
+		rocks.add(new Rock(camera));
+		
+		
+	}
+
 }
