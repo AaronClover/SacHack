@@ -18,21 +18,17 @@ public class Runner{
 	private Texture runningSprite[];
 	private Texture jumpingSprite[];
 	private Texture duckingSprite[];
-	private Texture hammer;
 	private Sound jump, land;
 	private Texture deadSprite[];
 	protected int animationIndex;
 	private float lastFrameTime;
 	protected Rectangle hitbox;
-	protected Rectangle hammerHitbox;
 	private float RESW;
 	private float RESH;
 	final int JUMP_WIDTH = 24;
 	final int DUCK_HEIGHT = 43;
 	final int SPRITE_WIDTH = 58;
 	final int SPRITE_HEIGHT = 60;
-	final int HAMMER_SPRITE_WIDTH = 50;
-	final int HAMMER_SPRITE_HEIGHT = 58;
 	final int SCALE = 1; // Only affects hit box at the moment
 	final int WIDTH = SPRITE_WIDTH * SCALE;
 	final int HEIGHT = SPRITE_HEIGHT * SCALE;
@@ -104,15 +100,12 @@ public class Runner{
 				new Texture(Gdx.files.internal("data/runner/dead/6.png")) };
 		deadSprite = deadInit;
 		
-		hammer = new Texture(Gdx.files.internal("data/runner/hammer.png"));
-		
 		jump = Gdx.audio.newSound(Gdx.files.internal("data/runner/jump.wav"));
 		land = Gdx.audio.newSound(Gdx.files.internal("data/runner/land.wav"));
 
 		hitbox = new Rectangle(camera.position.x + posX, floorHeight,
 				SPRITE_WIDTH, SPRITE_HEIGHT);
 				
-		hammerHitbox = new Rectangle (hitbox.x + SPRITE_WIDTH, hitbox.y, HAMMER_SPRITE_WIDTH, HAMMER_SPRITE_HEIGHT);
 		animationIndex = 0;
 		lastFrameTime = TimeUtils.nanoTime();
 		state = State.running;
@@ -177,7 +170,6 @@ public class Runner{
 					lastFrameTime = TimeUtils.nanoTime();
 				}
 		batch.draw(currentSprite, hitbox.x, hitbox.y);
-		batch.draw(hammer, hammerHitbox.x, hammerHitbox.y);
 
 	}
 	
@@ -186,7 +178,7 @@ public class Runner{
 		shapeRenderer.begin(ShapeType.Line);
 		//shapeRenderer.rect(hitbox.x*SCREENSCALEX, hitbox.y*SCREENSCALEY, hitbox.width, hitbox.height);
 		
-		shapeRenderer.rect(hammerHitbox.x*SCREENSCALEX - camera.position.x+400 , hitbox.y*SCREENSCALEY, hammerHitbox.width, hammerHitbox.height);
+		
 		
 		shapeRenderer.end();
 		
@@ -220,8 +212,7 @@ public class Runner{
 	
 		hitbox.x = camera.position.x + posX;
 		
-		hammerHitbox.x = hitbox.x + SPRITE_WIDTH;
-		hammerHitbox.y = hitbox.y;
+		
 
 		if (state == State.ducking) {
 			if (TimeUtils.nanoTime() - beginningOfRoll > 500000000) {

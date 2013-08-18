@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameScreen extends MyScreen {
-
+	protected ArrayList<Obstacle> obstacles;
 	private static final int FINGERS_SUPPORTED = 3;
 	protected static float runSpeed;
 	private Texture pauseButton;
@@ -258,20 +258,6 @@ public class GameScreen extends MyScreen {
 
 			}
 			
-			if (runner.hammerHitbox.overlaps(obstacles.get(i).hitbox)) {
-				obstacles.remove(i);
-			}
-			
-//			//Checks if hammer collides with an obstacle on the x axis
-//			if (runner.hammerHitbox.x + runner.hammerHitbox.width > obstacles.get(i).hitbox.x
-//					&& runner.hammerHitbox.x + runner.hammerHitbox.width < obstacles.get(i).hitbox.x + obstacles.get(i).hitbox.width) {
-//				//Checks if runner is in obstacle on y axis
-//				if ((runner.hammerHitbox.y < obstacles.get(i).hitbox.y - 5
-//						+ Obstacle.SPRITE_HEIGHT) && (runner.hammerHitbox.y + runner.hammerHitbox.height > obstacles.get(i).hitbox.y)) {
-//					endGame();
-//				}
-//
-//			}
 
 		}
 //

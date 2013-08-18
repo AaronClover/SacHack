@@ -39,7 +39,7 @@ public class MyScreen implements Screen, InputProcessor {
 	/*
 	 * In game objects
 	 */
-	protected ArrayList<Obstacle> obstacles;
+	
 	protected Runner runner;
 	/*
 	 * End in game objects
