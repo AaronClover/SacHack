@@ -109,6 +109,7 @@ public class GameScreen extends MyScreen {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		hammer = new Hammer(runner, obstacles);
+		hammerScore = 0;
 	}
 
 	@Override

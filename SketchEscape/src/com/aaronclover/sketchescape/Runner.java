@@ -45,7 +45,8 @@ public class Runner{
 	private final float SCREENSCALEY = MyScreen.SCREENSCALEY;
 	public boolean hasHammer = false;
 	private long hammerTimer;
-
+	private boolean duckReleased = true;
+	
 	// Debug
 	ShapeRenderer shapeRenderer;
 
@@ -275,16 +276,18 @@ public class Runner{
 	}
 
 	public void duck() {
-		if (state != State.jumping) {
+		if (state != State.jumping && state != State.ducking && duckReleased) {
 			beginningOfRoll = TimeUtils.nanoTime();
 			state = State.ducking;
 			hitbox.setHeight(DUCK_HEIGHT);
 			hitbox.setWidth(SPRITE_WIDTH);
+			duckReleased = false;
 		}
 
 	}
 
 	public void duckRelease() {
+		duckReleased=true;
 	}
 	
 	public void giveHammer() {
