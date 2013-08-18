@@ -1,7 +1,6 @@
 package com.aaronclover.sketchescape;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.loaders.SoundLoader.SoundParameter;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
