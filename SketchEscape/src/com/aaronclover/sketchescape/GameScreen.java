@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameScreen extends MyScreen {
 	protected ArrayList<Obstacle> obstacles;
+	protected ArrayList<Rock> rocks;
 	private static final int FINGERS_SUPPORTED = 3;
 	protected static float runSpeed;
 	private Texture pauseButton;
@@ -82,6 +83,8 @@ public class GameScreen extends MyScreen {
 		runner = new Runner(camera, FLOOR_HEIGHT);
 
 		obstacles = new ArrayList<Obstacle>();
+		rocks = new ArrayList<Rock>();
+		
 		lastSpawnPos = (int) camera.position.x + RESW;
 
 		score = 0;
@@ -159,6 +162,10 @@ public class GameScreen extends MyScreen {
 		for (int i = 0; i < obstacles.size(); i++) {
 			obstacles.get(i).draw(batch);
 		}
+		//Draws all rocks
+		for (int i = 0; i < rocks.size(); i++) {
+			rocks.get(i).draw(batch);
+		}
 
 		batch.end();
 	}
@@ -220,6 +227,10 @@ public class GameScreen extends MyScreen {
 		for (int i = 0; i < obstacles.size(); i++) {
 			obstacles.get(i).draw(batch);
 		}
+		//Draws all rocks
+				for (int i = 0; i < rocks.size(); i++) {
+					rocks.get(i).draw(batch);
+				}
 		//if(score >= 100)
 		//Draws hammer
 		hammer.draw(batch);
@@ -243,8 +254,18 @@ public class GameScreen extends MyScreen {
 					spawnPositionY));
 			lastSpawnPos = obstacles.get(obstacles.size() - 1).hitbox.x;
 		}
+		if (rocks.size() < 2) {
+			rocks.add(new Rock(camera, camera.position.x, 200));
+		}
 
 		boolean fall = true;
+		
+		for (int k = 0; k < rocks.size(); k++) {
+			if(runner.hitbox.overlaps(rocks.get(k).hitbox)) {
+				endGame();
+			}
+		}
+		
 		
 		for (int i = 0; i < obstacles.size(); i++) {
 			// Debug
