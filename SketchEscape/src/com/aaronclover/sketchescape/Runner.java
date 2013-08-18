@@ -43,6 +43,8 @@ public class Runner{
 	long beginningOfRoll;
 	private final float SCREENSCALEX = MyScreen.SCREENSCALEX;
 	private final float SCREENSCALEY = MyScreen.SCREENSCALEY;
+	public boolean hasHammer = false;
+	private long hammerTimer;
 
 	// Debug
 	ShapeRenderer shapeRenderer;
@@ -54,6 +56,7 @@ public class Runner{
 	};
 
 	State state;
+	
 	
 
 	// Debug
@@ -169,7 +172,6 @@ public class Runner{
 					lastFrameTime = TimeUtils.nanoTime();
 				}
 		batch.draw(currentSprite, hitbox.x, hitbox.y);
-
 	}
 	
 	public void drawHitbox() {
@@ -218,6 +220,12 @@ public class Runner{
 				state = State.running;
 				hitbox.setHeight(SPRITE_HEIGHT);
 				hitbox.setWidth(SPRITE_WIDTH);
+			}
+		}
+		
+		if (hasHammer) {
+			if (TimeUtils.nanoTime() - hammerTimer >= 5000000000f) {
+				hasHammer =false;
 			}
 		}
 
@@ -277,5 +285,10 @@ public class Runner{
 	}
 
 	public void duckRelease() {
+	}
+	
+	public void giveHammer() {
+		hasHammer = true;
+		hammerTimer = TimeUtils.nanoTime();
 	}
 }

@@ -41,6 +41,7 @@ public class GameScreen extends MyScreen {
 	private Vector2 floorBox = new Vector2(800, 20);
 	protected float backgroundPosX[];
 	public Hammer hammer;
+	int hammerScore ;
 	
 	
 
@@ -200,7 +201,12 @@ public class GameScreen extends MyScreen {
 
 		// Updates score
 		score = ((int) (camera.position.x - RESW / 2) / 100);
-
+		
+if (score - hammerScore >= 50)
+{  
+	runner.giveHammer();
+	hammerScore= score;
+}
 		// Rendering...everything!!!
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
@@ -211,7 +217,9 @@ public class GameScreen extends MyScreen {
 		batch.draw(pauseButton, camera.position.x - RESW / 2 + 10,
 				pauseButtonHeight, 50, 50);
 		runner.draw(batch);
-
+		if (runner.hasHammer) {
+			hammer.draw(batch);
+		}
 		// Draws Score
 		font.draw(batch, String.valueOf(score), camera.position.x + RESW / 2
 				- 100 - String.valueOf(score).length() * 7, RESH - 50);
@@ -221,14 +229,12 @@ public class GameScreen extends MyScreen {
 			obstacles.get(i).draw(batch);
 		}
 		//if(score >= 100)
-		//Draws hammer
-		hammer.draw(batch);
+
 		
 		batch.end();
 		camera.update();
 		// End of drawing
 		
-		hammer.update();
 
 		// generate random selection for obstacle to be on floor or mid height.
 		spawnPositionRandom = MathUtils.random(1, 2);
@@ -283,6 +289,9 @@ public class GameScreen extends MyScreen {
 		//runner.drawHitbox();
 //		
 		runner.update();
+		if (runner.hasHammer) {
+			hammer.update();
+		}
 
 	}
 
