@@ -36,6 +36,10 @@ public class Rock {
 		batch.draw(image, hitbox.x, hitbox.y, hitbox.width*SCALE, hitbox.height*SCALE);
 	}
 	
+	public void update() {
+		
+	}
+	
 	public void dispose() {
 		image.dispose();
 		

@@ -25,7 +25,7 @@ public class MainActivity extends AndroidApplication implements
 	protected static final int LOAD_ADS = 2;
 	// protected AdView adview;
 	private InterstitialAd intAd;
-
+	public final String leaderboardID = "CgkIuvLMycMNEAIQCA";
 	protected Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {

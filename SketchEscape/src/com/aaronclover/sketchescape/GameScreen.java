@@ -83,6 +83,7 @@ public class GameScreen extends MyScreen {
 		batch = new SpriteBatch();
 		runner = new Runner(camera, FLOOR_HEIGHT);
 
+		
 		obstacles = new ArrayList<Obstacle>();
 		rocks = new ArrayList<Rock>();
 		
@@ -144,8 +145,12 @@ public class GameScreen extends MyScreen {
 
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		for (int i = 0; i < rocks.size(); i++) {
+			rocks.get(i).update();
+		}
 
 		camera.update();
+		
 
 		batch.setProjectionMatrix(camera.combined);
 
@@ -311,6 +316,9 @@ if (score - hammerScore >= 50)
 		//runner.drawHitbox();
 //		
 		runner.update();
+		for (int i = 0; i < rocks.size(); i++) {
+			rocks.get(i).update();
+		}
 		if (runner.hasHammer) {
 			hammer.update();
 		}

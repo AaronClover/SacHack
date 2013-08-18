@@ -46,6 +46,7 @@ public class Runner{
 	public boolean hasHammer = false;
 	private long hammerTimer;
 	private boolean duckReleased = true;
+	private boolean hovering = false;
 	
 	// Debug
 	ShapeRenderer shapeRenderer;
@@ -264,10 +265,14 @@ public class Runner{
 		}
 
 		
-		if (state == State.jumping && speedY < 0) {
+		if (state == State.jumping && speedY < 0) { //&& !hovering) {
+			hovering = true;
 			speedY += FLOAT_RATE;
 			}
-
+		else {
+			hovering = false;
+		}
+		
 	}
 
 	public void jumpRelease() {
