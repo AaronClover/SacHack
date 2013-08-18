@@ -42,6 +42,7 @@ public class GameScreen extends MyScreen {
 	private Vector2 floorBox = new Vector2(800, 20);
 	protected float backgroundPosX[];
 	public Hammer hammer;
+	int hammerScore ;
 	
 	
 
@@ -111,6 +112,7 @@ public class GameScreen extends MyScreen {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		hammer = new Hammer(runner, obstacles);
+		hammerScore = 0;
 	}
 
 	@Override
@@ -207,7 +209,12 @@ public class GameScreen extends MyScreen {
 
 		// Updates score
 		score = ((int) (camera.position.x - RESW / 2) / 100);
-
+		
+if (score - hammerScore >= 50)
+{  
+	runner.giveHammer();
+	hammerScore= score;
+}
 		// Rendering...everything!!!
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
@@ -218,7 +225,9 @@ public class GameScreen extends MyScreen {
 		batch.draw(pauseButton, camera.position.x - RESW / 2 + 10,
 				pauseButtonHeight, 50, 50);
 		runner.draw(batch);
-
+		if (runner.hasHammer) {
+			hammer.draw(batch);
+		}
 		// Draws Score
 		font.draw(batch, String.valueOf(score), camera.position.x + RESW / 2
 				- 100 - String.valueOf(score).length() * 7, RESH - 50);
@@ -232,14 +241,12 @@ public class GameScreen extends MyScreen {
 					rocks.get(i).draw(batch);
 				}
 		//if(score >= 100)
-		//Draws hammer
-		hammer.draw(batch);
+
 		
 		batch.end();
 		camera.update();
 		// End of drawing
 		
-		hammer.update();
 
 		// generate random selection for obstacle to be on floor or mid height.
 		spawnPositionRandom = MathUtils.random(1, 2);
@@ -304,6 +311,9 @@ public class GameScreen extends MyScreen {
 		//runner.drawHitbox();
 //		
 		runner.update();
+		if (runner.hasHammer) {
+			hammer.update();
+		}
 
 	}
 
@@ -349,6 +359,7 @@ public class GameScreen extends MyScreen {
 
 	private void touchInput() {
 		boolean rightTouched = false;
+		boolean leftTouched= false;
 		boolean pauseTouched = false;
 		for (int i = 0; i < FINGERS_SUPPORTED; i++) {
 			if (Gdx.input.isTouched(i)) {
@@ -364,6 +375,7 @@ public class GameScreen extends MyScreen {
 				// If user touches left side of the screen then Runner Ducks
 				if (touchedX < 400) {
 					runner.duck();
+					leftTouched = true;
 				}
 				// user touches right side of the screen then Jump.
 				if (touchedX >= 400) {
@@ -374,6 +386,9 @@ public class GameScreen extends MyScreen {
 		}
 		if (rightTouched == false) {
 			runner.jumpRelease();
+		}
+		if  (leftTouched == false) {
+			runner.duckRelease();
 		}
 		if (pauseTouched == false) {
 			pReleased = true;

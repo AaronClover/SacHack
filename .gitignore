@@ -6,6 +6,7 @@
 
 my-gdx-game-android/bin/
 tmp/
+.project
 .classpath
 *.tmp
 *.bak
