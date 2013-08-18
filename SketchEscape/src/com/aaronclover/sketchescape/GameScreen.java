@@ -338,6 +338,7 @@ if (score - hammerScore >= 50)
 
 	private void touchInput() {
 		boolean rightTouched = false;
+		boolean leftTouched= false;
 		boolean pauseTouched = false;
 		for (int i = 0; i < FINGERS_SUPPORTED; i++) {
 			if (Gdx.input.isTouched(i)) {
@@ -353,6 +354,7 @@ if (score - hammerScore >= 50)
 				// If user touches left side of the screen then Runner Ducks
 				if (touchedX < 400) {
 					runner.duck();
+					leftTouched = true;
 				}
 				// user touches right side of the screen then Jump.
 				if (touchedX >= 400) {
@@ -363,6 +365,9 @@ if (score - hammerScore >= 50)
 		}
 		if (rightTouched == false) {
 			runner.jumpRelease();
+		}
+		if  (leftTouched == false) {
+			runner.duckRelease();
 		}
 		if (pauseTouched == false) {
 			pReleased = true;
