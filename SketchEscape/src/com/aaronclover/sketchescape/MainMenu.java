@@ -12,7 +12,7 @@ public class MainMenu extends MyScreen {
 	private SketchEscape game;
 	private Texture howtoButton;
 	private Texture playButton;
-	final int PLAY_BUTTON_WIDTH = 300;
+	final int PLAY_BUTTON_WIDTH = 200;
 	final int PLAY_BUTTON_HEIGHT = 100;
 	private Rectangle playBox, howtoBox;
 
